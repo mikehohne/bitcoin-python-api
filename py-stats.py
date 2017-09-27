@@ -5,21 +5,28 @@ import numpy as np
 import time
 import threading
 import matplotlib.pyplot as plt
-from exchanges import Bitfinex, CoinDesk, Bitstamp
+from exchanges import Bitfinex, Bitstamp
 
 
-bitcoin_prices = []
+bf_bitcoin_prices = []
+bs_bitcoin_price = []
 
-for x in range(0, 20):
-    price = Bitfinex().get_current_price()
-    price = int(float(price))
+for x in range(0, 30):
+    bf_price = Bitfinex().get_current_price()
+    bs_price = Bitstamp().get_current_price()
+    bf_price = int(float(bf_price))
+    bs_price = int(float(bs_price))
     start = time.time()
-    time.sleep(5)
-    bitcoin_prices.append(price)
+    time.sleep(2)
+    bf_bitcoin_prices.append(bf_price)
+    bs_bitcoin_price.append(bs_price)
 
-print bitcoin_prices
-plt.plot(bitcoin_prices)
-plt.ylabel('BTC Price')
+plt.plot(bf_bitcoin_prices, label='Bitfinex')
+plt.plot(bs_bitcoin_price, label="Bitstamp")
+plt.xlabel('Time')
+plt.ylabel('BTC Price $')
+plt.title('Bitcoin Exchange Prices\nPast 15 minutes')
+plt.legend()
 plt.show()
 
 
