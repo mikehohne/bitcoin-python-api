@@ -3,21 +3,29 @@ import sys
 import os
 import numpy as np
 import time
+import threading
 import matplotlib.pyplot as plt
-from pybitcoin import Bitcoin
+from exchanges import Bitfinex, CoinDesk, Bitstamp
+
 
 bitcoin_prices = []
 
-for x in range(0, 2):
-    price = Bitcoin().get_btc_price()
+for x in range(0, 20):
+    price = Bitfinex().get_current_price()
+    price = int(float(price))
+    start = time.time()
+    time.sleep(5)
     bitcoin_prices.append(price)
 
-print (bitcoin_prices)
+print bitcoin_prices
+plt.plot(bitcoin_prices)
+plt.ylabel('BTC Price')
+plt.show()
+
+
     
-# plt.plot([1, 2, 3, 4], [10, 20, 25, 30], color='lightblue', linewidth=3)
-# plt.scatter([0.3, 3.8, 1.2, 2.5], [11, 25, 9, 26], color='darkgreen', marker='^')
-# plt.xlim(0.5, 4.5)
-# plt.show()
+
+
 
 
 

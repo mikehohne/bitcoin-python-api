@@ -1,8 +1,7 @@
-from exchanges.bitfinex import Bitfinex
+from exchanges import Bitfinex, CoinDesk
 
 class Bitcoin:
     def get_btc_price(self):
-        bitcoin_price = Bitfinex().get_current_price()
-        print bitcoin_price
+        bitcoin_price = CoinDesk().get_current_price()
 c = Bitcoin()
 c.get_btc_price()
